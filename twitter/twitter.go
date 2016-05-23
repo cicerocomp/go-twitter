@@ -19,6 +19,7 @@ type Client struct {
 	Followers      *FollowerService
 	DirectMessages *DirectMessageService
 	Streams        *StreamService
+	Search         *SearchService
 }
 
 // NewClient returns a new Client.
@@ -33,6 +34,7 @@ func NewClient(httpClient *http.Client) *Client {
 		Followers:      newFollowerService(base.New()),
 		DirectMessages: newDirectMessageService(base.New()),
 		Streams:        newStreamService(httpClient, base.New()),
+		Search:         newSearchService(base.New()),
 	}
 }
 
@@ -46,6 +48,13 @@ func Bool(v bool) *bool {
 // Float returns a new pointer to the given float64 value.
 func Float(v float64) *float64 {
 	ptr := new(float64)
+	*ptr = v
+	return ptr
+}
+
+// Float returns a new pointer to the given float64 value.
+func Int(v int64) *int64 {
+	ptr := new(int64)
 	*ptr = v
 	return ptr
 }
